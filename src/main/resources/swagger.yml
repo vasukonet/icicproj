@@ -1,0 +1,52 @@
+# This is an example swagger definition for a skeleton project. The specification for a swagger definition
+# can be found at http://swagger.io/specification/
+
+swagger: '2.0'
+info:
+  title: com.icic
+  description: Enter a description for your API here.
+  version: 1.0.0
+
+# This schemes object allows you to specify http or https for api calls. Omitting the schemes object will cause swagger
+# to use whatever scheme was used to load this definition (when they publish a new version with the bugfix).
+schemes:
+  - https
+
+# This is prepended to every path when a request is made.
+basePath: /com.icic
+
+# This is a list of MIME types the APIs defined here can produce. This value is global but can be overriden on a
+# per-API basis.
+produces:
+  - application/json
+
+# This is a list of paths and methods that the API makes available.
+paths:
+  /status/ping:
+    get:
+      produces:
+        - text/plain
+      summary: Ping API for HAProxy
+      description: |
+        Returns a 200 OK response if this application is currently accepting requests or a non-200 response if is
+        is not currently accepting requests.
+      tags:
+        - included
+      responses:
+        200:
+          description: Server's hostname and timestamp
+          schema:
+            type: string
+            description: hostname - timestamp
+  /status/health:
+    get:            
+      summary: Health API for application monitoring
+      description: |
+        Returns a response indicating whether or not this application is currently healthy. The default behavior, if 
+        not overridden, is the same as /status/ping
+      responses:
+        200:
+          description: Server's hostname and timestamp
+          schema:
+            type: string
+            description: hostname - timestamp
